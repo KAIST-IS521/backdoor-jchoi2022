@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------------
 
 #include <stdint.h>
+#include <stdbool.h>
 
 #ifndef MINIVM_H
 #define MINIVM_H
@@ -34,10 +35,15 @@ typedef struct Reg {
 } Reg;
 
 typedef struct VMContext {
+    uint32_t pc;
     uint32_t numRegs;
     uint32_t numFuns;
     Reg* r;           // Ptr to register array.
     FunPtr* funtable; // Ptr to a funptr table.
+    uint32_t numInstrs;
+    uint32_t * code;
+    uint32_t heapSz;
+    uint8_t * heap;
 } VMContext;
 
 
@@ -72,11 +78,15 @@ void initVMContext(struct VMContext* ctx,
                       const uint32_t numRegs,
                       const uint32_t numFuns,
                                 Reg* registers,
-                             FunPtr* funtable);
+                             FunPtr* funtable,
+                            uint32_t num_instrs,
+                          uint32_t * code,
+                            uint32_t heapSz,
+                           uint8_t * heap);
 
 // Reads an instruction, executes it, then steps to the next instruction.
-// stepVMContext :: VMContext -> uint32_t** -> Effect()
-void stepVMContext(struct VMContext* ctx, uint32_t** pc);
+// stepVMContext :: VMContext -> bool
+bool stepVMContext(struct VMContext* ctx);
 
 
 //---------------------------------------------------------
