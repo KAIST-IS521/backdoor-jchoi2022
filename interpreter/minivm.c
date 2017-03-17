@@ -49,6 +49,30 @@ bool halt(struct VMContext* ctx, const uint32_t instr) {
   return false; // stop running
 }
 
+bool load(struct VMContext* ctx, const uint32_t instr) {
+  const uint8_t dst_idx = EXTRACT_B1(instr);
+  const uint8_t addr_idx = EXTRACT_B2(instr);
+  const uint32_t addr = ctx->r[addr_idx];
+  if (addr >= ctx->heapSz) {
+    printf("Segmentation fault in 'load', aborts\n");
+    return false;
+  }
+  ctx->r[dst_idx] = (uint32_t) ctx->heap[addr]; // unsigned int, so extended with 0
+  return true;
+}
+
+bool store(struct VMContext* ctx, const uint32_t instr) {
+  const uint8_t addr_idx = EXTRACT_B1(instr);
+  const uint8_t src_idx = EXTRACT_B2(instr);
+  const uint32_t addr = ctx->r[addr_idx];
+  if (addr >= ctx->heapSz) {
+    printf("Segmentation fault in 'store', aborts\n");
+    return false;
+  }
+  ctx->heap[addr] = (uint8_t) ctx->r[src_idx]; // extract lower 8bit
+  return true;
+}
+
 bool move(struct VMContext* ctx, const uint32_t instr) {
   const uint8_t dst_idx = EXTRACT_B1(instr);
   const uint8_t src_idx = EXTRACT_B2(instr);

@@ -88,6 +88,8 @@ bool stepVMContext(struct VMContext* ctx);
 #endif //ifndef MINIVM_H
 
 bool halt(struct VMContext* ctx, const uint32_t);
+bool load(struct VMContext* ctx, const uint32_t);
+bool store(struct VMContext* ctx, const uint32_t);
 bool move(struct VMContext* ctx, const uint32_t);
 bool puti(struct VMContext* ctx, const uint32_t);
 bool add(struct VMContext* ctx, const uint32_t);
