@@ -33,16 +33,23 @@ Reg* registers, FunPtr* funtable, uint32_t numInstrs, uint32_t * code, uint32_t 
 // stepVMContext :: VMContext -> bool
 bool stepVMContext(struct VMContext* ctx) {
     // Read a 32-bit bytecode instruction.
-    uint32_t instr = ctx->code[ctx->pc];
-    const uint8_t idx = EXTRACT_B0(instr);
+    uint32_t instr;
+    uint8_t opc;
 
-    // Dispatch to an opcode-handler.
-    if (ctx->funtable[idx] == NULL) {
+    if (ctx->pc >= ctx->numInstrs) {
+      printf("Invalid program counter, aborts\n");
+      return false;
+    }
+
+    instr = ctx->code[ctx->pc];
+    opc = EXTRACT_B0(instr);
+
+    if (ctx->funtable[opc] == NULL) {
       printf("Invalid opcode, aborts\n");
       return false;
     }
 
-    return (ctx->funtable[idx])(ctx, instr);
+    return (ctx->funtable[opc])(ctx, instr);
 }
 
 bool halt(struct VMContext* ctx, const uint32_t instr) {
