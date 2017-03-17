@@ -102,3 +102,30 @@ bool sub(struct VMContext* ctx, const uint32_t instr) {
   ctx->r[dst_idx] = ctx->r[oprnd1_idx] - ctx->r[oprnd2_idx];
   return true;
 }
+
+bool gt(struct VMContext* ctx, const uint32_t instr) {
+  const uint8_t dst_idx = EXTRACT_B1(instr);
+  const uint8_t oprnd1_idx = EXTRACT_B2(instr);
+  const uint8_t oprnd2_idx = EXTRACT_B3(instr);
+  const uint32_t cmp_result = (ctx->r[oprnd1_idx] > ctx->r[oprnd2_idx]) ? 1 : 0;
+  ctx->r[dst_idx] = cmp_result;
+  return true;
+}
+
+bool ge(struct VMContext* ctx, const uint32_t instr) {
+  const uint8_t dst_idx = EXTRACT_B1(instr);
+  const uint8_t oprnd1_idx = EXTRACT_B2(instr);
+  const uint8_t oprnd2_idx = EXTRACT_B3(instr);
+  const uint32_t cmp_result = (ctx->r[oprnd1_idx] >= ctx->r[oprnd2_idx]) ? 1 : 0;
+  ctx->r[dst_idx] = cmp_result;
+  return true;
+}
+
+bool eq(struct VMContext* ctx, const uint32_t instr) {
+  const uint8_t dst_idx = EXTRACT_B1(instr);
+  const uint8_t oprnd1_idx = EXTRACT_B2(instr);
+  const uint8_t oprnd2_idx = EXTRACT_B3(instr);
+  const uint32_t cmp_result = (ctx->r[oprnd1_idx] == ctx->r[oprnd2_idx]) ? 1 : 0;
+  ctx->r[dst_idx] = cmp_result;
+  return true;
+}

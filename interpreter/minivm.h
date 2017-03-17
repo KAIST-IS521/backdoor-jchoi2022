@@ -94,3 +94,6 @@ bool move(struct VMContext* ctx, const uint32_t);
 bool puti(struct VMContext* ctx, const uint32_t);
 bool add(struct VMContext* ctx, const uint32_t);
 bool sub(struct VMContext* ctx, const uint32_t);
+bool gt(struct VMContext* ctx, const uint32_t);
+bool ge(struct VMContext* ctx, const uint32_t);
+bool eq(struct VMContext* ctx, const uint32_t);
