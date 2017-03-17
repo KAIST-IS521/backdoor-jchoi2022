@@ -58,6 +58,7 @@ bool load(struct VMContext* ctx, const uint32_t instr) {
     return false;
   }
   ctx->r[dst_idx] = (uint32_t) ctx->heap[addr]; // unsigned int, so extended with 0
+  ctx->pc++;
   return true;
 }
 
@@ -70,6 +71,7 @@ bool store(struct VMContext* ctx, const uint32_t instr) {
     return false;
   }
   ctx->heap[addr] = (uint8_t) ctx->r[src_idx]; // extract lower 8bit
+  ctx->pc++;
   return true;
 }
 
@@ -77,6 +79,7 @@ bool move(struct VMContext* ctx, const uint32_t instr) {
   const uint8_t dst_idx = EXTRACT_B1(instr);
   const uint8_t src_idx = EXTRACT_B2(instr);
   ctx->r[dst_idx] = ctx->r[src_idx];
+  ctx->pc++;
   return true;
 }
 
@@ -92,6 +95,7 @@ bool add(struct VMContext* ctx, const uint32_t instr) {
   const uint8_t oprnd1_idx = EXTRACT_B2(instr);
   const uint8_t oprnd2_idx = EXTRACT_B3(instr);
   ctx->r[dst_idx] = ctx->r[oprnd1_idx] + ctx->r[oprnd2_idx];
+  ctx->pc++;
   return true;
 }
 
@@ -100,6 +104,7 @@ bool sub(struct VMContext* ctx, const uint32_t instr) {
   const uint8_t oprnd1_idx = EXTRACT_B2(instr);
   const uint8_t oprnd2_idx = EXTRACT_B3(instr);
   ctx->r[dst_idx] = ctx->r[oprnd1_idx] - ctx->r[oprnd2_idx];
+  ctx->pc++;
   return true;
 }
 
@@ -109,6 +114,7 @@ bool gt(struct VMContext* ctx, const uint32_t instr) {
   const uint8_t oprnd2_idx = EXTRACT_B3(instr);
   const uint32_t cmp_result = (ctx->r[oprnd1_idx] > ctx->r[oprnd2_idx]) ? 1 : 0;
   ctx->r[dst_idx] = cmp_result;
+  ctx->pc++;
   return true;
 }
 
@@ -118,6 +124,7 @@ bool ge(struct VMContext* ctx, const uint32_t instr) {
   const uint8_t oprnd2_idx = EXTRACT_B3(instr);
   const uint32_t cmp_result = (ctx->r[oprnd1_idx] >= ctx->r[oprnd2_idx]) ? 1 : 0;
   ctx->r[dst_idx] = cmp_result;
+  ctx->pc++;
   return true;
 }
 
@@ -127,5 +134,6 @@ bool eq(struct VMContext* ctx, const uint32_t instr) {
   const uint8_t oprnd2_idx = EXTRACT_B3(instr);
   const uint32_t cmp_result = (ctx->r[oprnd1_idx] == ctx->r[oprnd2_idx]) ? 1 : 0;
   ctx->r[dst_idx] = cmp_result;
+  ctx->pc++;
   return true;
 }
