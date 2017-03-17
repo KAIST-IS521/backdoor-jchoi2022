@@ -95,6 +95,7 @@ bool puti(struct VMContext* ctx, const uint32_t instr) {
   const uint8_t dst_idx = EXTRACT_B1(instr);
   const uint8_t imm = EXTRACT_B2(instr);
   ctx->r[dst_idx] = (uint32_t) imm; // unsigned int, so extended with 0
+  ctx->pc++;
   return true;
 }
 
