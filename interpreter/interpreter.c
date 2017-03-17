@@ -41,6 +41,8 @@ void initFuncs(FunPtr *f, uint32_t cnt) {
     f[0x90] = eq;
     f[0xa0] = ite;
     f[0xb0] = jump;
+    f[0xc0] = puts_instr;
+    f[0xd0] = gets_instr;
 }
 
 void initRegs(Reg *r, uint32_t cnt)

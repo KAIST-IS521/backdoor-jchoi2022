@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------------
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <stdbool.h>
 #include "minivm.h"
 
@@ -160,5 +161,43 @@ bool ite(struct VMContext* ctx, const uint32_t instr) {
 bool jump(struct VMContext* ctx, const uint32_t instr) {
   ctx->pc = EXTRACT_B1(instr);
   // Check the validity of range in stepVMContext()
+  return true;
+}
+
+bool puts_instr(struct VMContext* ctx, const uint32_t instr) {
+  const uint8_t addr_idx = EXTRACT_B1(instr);
+  uint32_t addr = ctx->r[addr_idx];
+  char c;
+  size_t len;
+
+  while (addr < ctx->heapSz) {
+    c = (char) ctx->heap[addr++];
+    if (c == '\0')
+      break; // no newline, according to spec document
+    len = write(1, &c, sizeof(char));
+    if (len != 1)
+      break;
+  }
+
+  ctx->pc++;
+  return true;
+}
+
+bool gets_instr(struct VMContext* ctx, const uint32_t instr) {
+  const uint8_t addr_idx = EXTRACT_B1(instr);
+  uint32_t addr = ctx->r[addr_idx];
+  char c;
+  size_t len;
+
+  while (addr < ctx->heapSz) {
+    len = read(0, &c, sizeof(char));
+    if (len != 1 || c == '\n') { // EOF or newline
+      ctx->heap[addr] = '\0';
+      break;
+    }
+    ctx->heap[addr++] = c;
+  }
+
+  ctx->pc++;
   return true;
 }

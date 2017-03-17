@@ -99,3 +99,5 @@ bool ge(struct VMContext* ctx, const uint32_t);
 bool eq(struct VMContext* ctx, const uint32_t);
 bool ite(struct VMContext* ctx, const uint32_t);
 bool jump(struct VMContext* ctx, const uint32_t);
+bool puts_instr(struct VMContext* ctx, const uint32_t);
+bool gets_instr(struct VMContext* ctx, const uint32_t);
