@@ -26,7 +26,7 @@
 
 struct VMContext;
 
-typedef void (*FunPtr)(struct VMContext* ctx, const uint32_t);
+typedef bool (*FunPtr)(struct VMContext* ctx, const uint32_t);
 
 //CHANGE THE INTERNALS OF THIS FOR YOUR OWN VM!
 typedef struct Reg {
@@ -65,12 +65,6 @@ static FunPtr mvm_function_table[MVM_NUM_FUNS];
 
 //---------------------------------------------------------
 // FUNCTIONS:
-
-
-// Selects and executes an opcode function from the function pointer table.
-// Passes the entire bytecode instruction as the argument.
-// dispatch :: VMContext -> uint32_t -> Effect()
-void dispatch(struct VMContext* ctx, const uint32_t instr);
 
 // Initializes a VMContext in-place.
 // initVMContext :: VMContext -> uint32_t -> uint32_t -> [Reg] -> [FunPtr] -> Effect()

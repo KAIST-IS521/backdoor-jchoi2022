@@ -3,6 +3,7 @@
 // Copyright (C) Philip Conrad 4/30/2013 @ 3:56 PM -- MIT License
 //
 //-----------------------------------------------------------------------------
+#include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include "minivm.h"
@@ -10,15 +11,6 @@
 
 //---------------------------------------------------------
 // FUNCTION IMPLEMENTATIONS:
-
-
-// Defers decoding of register args to the called function.
-// dispatch :: VMContext -> uint32_t -> Effect()
-void dispatch(struct VMContext* ctx, const uint32_t instr) {
-    const uint8_t i = EXTRACT_B0(instr);
-    if (ctx->funtable[i] != NULL)
-      (ctx->funtable[i])(ctx, instr);
-}
 
 
 // Initializes a VMContext in-place.
@@ -42,10 +34,13 @@ Reg* registers, FunPtr* funtable, uint32_t numInstrs, uint32_t * code, uint32_t 
 bool stepVMContext(struct VMContext* ctx) {
     // Read a 32-bit bytecode instruction.
     uint32_t instr = ctx->code[ctx->pc];
+    const uint8_t idx = EXTRACT_B0(instr);
 
     // Dispatch to an opcode-handler.
-    dispatch(ctx, instr);
+    if (ctx->funtable[idx] == NULL) {
+      printf("Invalid opcode, aborts\n");
+      return false;
+    }
 
-    return true;
+    return (ctx->funtable[idx])(ctx, instr);
 }
-
