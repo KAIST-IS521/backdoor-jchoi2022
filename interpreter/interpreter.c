@@ -81,6 +81,7 @@ int main(int argc, char** argv) {
     }
     num_instrs = code_size / sizeof(uint32_t);
 
+    //printf("num_instrs : %d\n", num_instrs);
     code = (uint32_t *) malloc(code_size);
     if (num_instrs != fread(code, sizeof (uint32_t), num_instrs, bytecode_f)) {
       perror("fread");

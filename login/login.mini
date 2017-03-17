@@ -1,0 +1,280 @@
+puti r0, 0
+puti r1, 1
+puti r4, 4
+
+; mem[100] = "User: "
+puti r100, 100
+
+puti r101, 'U'
+store r100, r101
+add r100, r100, r1
+
+puti r102, 's'
+store r100, r102
+add r100, r100, r1
+
+puti r103, 'e'
+store r100, r103
+add r100, r100, r1
+
+puti r104, 'r'
+store r100, r104
+add r100, r100, r1
+
+puti r105, ':'
+store r100, r105
+add r100, r100, r1
+
+puti r106, 0x20
+store r100, r106
+; add r100, r100, r1
+
+puti r100, 100
+puts r100
+
+; r101~r105 = "user\0"
+puti r101, 'u'
+puti r105, 0
+
+; gets(buf)
+puti r200, 200
+gets r200
+
+; strcmp(buf, "user\0")
+
+; ('u')
+load r201, r200
+eq r202, r201, r101
+ite r202, 30, 145
+add r200, r200, r1 
+; Label 30
+
+; ('s')
+load r201, r200
+eq r202, r201, r102
+ite r202, 34, 145
+add r200, r200, r1 
+; Label 34
+
+; ('e')
+load r201, r200
+eq r202, r201, r103
+ite r202, 38, 145
+add r200, r200, r1 
+; Label 38
+
+
+; ('r')
+load r201, r200
+eq r202, r201, r104
+ite r202, 42, 145
+add r200, r200, r1
+; Label 42
+
+; ('\0')
+load r201, r200
+eq r202, r201, r105
+ite r202, 46, 145
+add r200, r200, r1
+; Label 46
+
+
+; mem[100] = "Password: "
+puti r100, 100
+
+puti r101, 'P'
+store r100, r101
+add r100, r100, r1
+
+puti r102, 'a'
+store r100, r102
+add r100, r100, r1
+
+puti r103, 's'
+store r100, r103
+add r100, r100, r1
+
+puti r104, 's'
+store r100, r104
+add r100, r100, r1
+
+puti r105, 'w'
+store r100, r105
+add r100, r100, r1
+
+puti r106, 'o'
+store r100, r106
+add r100, r100, r1
+
+puti r107, 'r'
+store r100, r107
+add r100, r100, r1
+
+puti r108, 'd'
+store r100, r108
+add r100, r100, r1
+
+puti r109, ':'
+store r100, r109
+add r100, r100, r1
+
+puti r110, 0x20
+store r100, r110
+; add r100, r100, r1
+
+puti r100, 100
+puts r100
+
+; r101~r109 = "password\0"
+puti r101, 'p'
+puti r109, 0
+
+; gets(buf)
+puti r200, 200
+gets r200
+
+; strcmp(buf, "password\0")
+
+; ('p')
+load r201, r200
+eq r202, r201, r101
+ite r202, 86, 145
+add r200, r200, r1 
+; Label 86
+
+; ('a')
+load r201, r200
+eq r202, r201, r102
+ite r202, 90, 145
+add r200, r200, r1 
+; Label 90
+
+; ('s')
+load r201, r200
+eq r202, r201, r103
+ite r202, 94, 145
+add r200, r200, r1 
+; Label 94
+
+; ('s')
+load r201, r200
+eq r202, r201, r104
+ite r202, 98, 145
+add r200, r200, r1
+; Label 98
+
+; ('w')
+load r201, r200
+eq r202, r201, r105
+ite r202, 102, 145
+add r200, r200, r1
+; Label 102
+
+
+; ('o')
+load r201, r200
+eq r202, r201, r106
+ite r202, 106, 145
+add r200, r200, r1
+; Label 106
+
+; ('r')
+load r201, r200
+eq r202, r201, r107
+ite r202, 110, 145
+add r200, r200, r1
+; Label 110
+
+; ('d')
+load r201, r200
+eq r202, r201, r108
+ite r202, 114, 145
+add r200, r200, r1
+; Label 114
+
+; ('\0')
+load r201, r200
+eq r202, r201, r109
+ite r202, 118, 145
+add r200, r200, r1
+; Label 118
+
+
+; mem[100] = "Success", and puts(&mem[100])
+puti r100, 100
+
+puti r101, 'S'
+store r100, r101
+add r100, r100, r1
+
+puti r101, 'u'
+store r100, r101
+add r100, r100, r1
+
+puti r101, 'c'
+store r100, r101
+add r100, r100, r1
+
+puti r101, 'c'
+store r100, r101
+add r100, r100, r1
+
+puti r101, 'e'
+store r100, r101
+add r100, r100, r1
+
+puti r101, 's'
+store r100, r101
+add r100, r100, r1
+
+puti r101, 's'
+store r100, r101
+add r100, r100, r1
+
+store r100, r0
+; add r100, r100, r1
+
+puti r100, 100
+puts r100
+
+halt
+
+
+; mem[100] = "Failure", and puts(&mem[100])
+puti r100, 100
+
+puti r101, 'F'
+store r100, r101
+add r100, r100, r1
+
+puti r101, 'a'
+store r100, r101
+add r100, r100, r1
+
+puti r101, 'i'
+store r100, r101
+add r100, r100, r1
+
+puti r101, 'l'
+store r100, r101
+add r100, r100, r1
+
+puti r101, 'u'
+store r100, r101
+add r100, r100, r1
+
+puti r101, 'r'
+store r100, r101
+add r100, r100, r1
+
+puti r101, 'e'
+store r100, r101
+add r100, r100, r1
+
+store r100, r0
+; add r100, r100, r1
+
+puti r100, 100
+puts r100
+
+halt
