@@ -137,3 +137,21 @@ bool eq(struct VMContext* ctx, const uint32_t instr) {
   ctx->pc++;
   return true;
 }
+
+bool ite(struct VMContext* ctx, const uint32_t instr) {
+  const uint8_t cond_idx = EXTRACT_B1(instr);
+  const uint8_t true_br = EXTRACT_B2(instr);
+  const uint8_t false_br = EXTRACT_B3(instr);
+  if (ctx->r[cond_idx] != 0)  //this is same to '> 0'
+    ctx->pc = true_br;
+  else
+    ctx->pc = false_br;
+  // Check the validity of range in stepVMContext()
+  return true;
+}
+
+bool jump(struct VMContext* ctx, const uint32_t instr) {
+  ctx->pc = EXTRACT_B1(instr);
+  // Check the validity of range in stepVMContext()
+  return true;
+}
