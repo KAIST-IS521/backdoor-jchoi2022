@@ -37,8 +37,7 @@ void initRegs(Reg *r, uint32_t cnt)
 {
     uint32_t i;
     for (i = 0; i < cnt; i++) {
-        r[i].type = 0;
-        r[i].value = 0;
+        r[i] = 0;
     }
 }
 

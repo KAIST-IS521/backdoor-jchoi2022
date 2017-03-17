@@ -44,3 +44,37 @@ bool stepVMContext(struct VMContext* ctx) {
 
     return (ctx->funtable[idx])(ctx, instr);
 }
+
+bool halt(struct VMContext* ctx, const uint32_t instr) {
+  return false; // stop running
+}
+
+bool move(struct VMContext* ctx, const uint32_t instr) {
+  const uint8_t dst_idx = EXTRACT_B1(instr);
+  const uint8_t src_idx = EXTRACT_B2(instr);
+  ctx->r[dst_idx] = ctx->r[src_idx];
+  return true;
+}
+
+bool puti(struct VMContext* ctx, const uint32_t instr) {
+  const uint8_t dst_idx = EXTRACT_B1(instr);
+  const uint8_t imm = EXTRACT_B2(instr);
+  ctx->r[dst_idx] = (uint32_t) imm; // unsigned int, so extended with 0
+  return true;
+}
+
+bool add(struct VMContext* ctx, const uint32_t instr) {
+  const uint8_t dst_idx = EXTRACT_B1(instr);
+  const uint8_t oprnd1_idx = EXTRACT_B2(instr);
+  const uint8_t oprnd2_idx = EXTRACT_B3(instr);
+  ctx->r[dst_idx] = ctx->r[oprnd1_idx] + ctx->r[oprnd2_idx];
+  return true;
+}
+
+bool sub(struct VMContext* ctx, const uint32_t instr) {
+  const uint8_t dst_idx = EXTRACT_B1(instr);
+  const uint8_t oprnd1_idx = EXTRACT_B2(instr);
+  const uint8_t oprnd2_idx = EXTRACT_B3(instr);
+  ctx->r[dst_idx] = ctx->r[oprnd1_idx] - ctx->r[oprnd2_idx];
+  return true;
+}

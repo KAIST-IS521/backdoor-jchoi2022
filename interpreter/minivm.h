@@ -28,11 +28,12 @@ struct VMContext;
 
 typedef bool (*FunPtr)(struct VMContext* ctx, const uint32_t);
 
+typedef uint32_t Reg;
 //CHANGE THE INTERNALS OF THIS FOR YOUR OWN VM!
-typedef struct Reg {
-    uint32_t type;
-    uint32_t value;
-} Reg;
+//typedef struct Reg {
+//    uint32_t type;
+//    uint32_t value;
+//} Reg;
 
 typedef struct VMContext {
     uint32_t pc;
@@ -85,3 +86,9 @@ bool stepVMContext(struct VMContext* ctx);
 
 //---------------------------------------------------------
 #endif //ifndef MINIVM_H
+
+bool halt(struct VMContext* ctx, const uint32_t);
+bool move(struct VMContext* ctx, const uint32_t);
+bool puti(struct VMContext* ctx, const uint32_t);
+bool add(struct VMContext* ctx, const uint32_t);
+bool sub(struct VMContext* ctx, const uint32_t);
