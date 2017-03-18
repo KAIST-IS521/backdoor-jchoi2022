@@ -37,7 +37,9 @@ puti r101, 'u'
 puti r105, 0
 
 ; gets(buf)
-puti r200, 200
+puti r200, 255
+add r200, r200, r1
+add r200, r200, r200
 gets r200
 
 ; strcmp(buf, "user\0")
@@ -45,38 +47,38 @@ gets r200
 ; ('u')
 load r201, r200
 eq r202, r201, r101
-ite r202, 30, 145
+ite r202, 32, 147
 add r200, r200, r1 
-; Label 30
+; Label 32
 
 ; ('s')
 load r201, r200
 eq r202, r201, r102
-ite r202, 34, 145
+ite r202, 36, 147
 add r200, r200, r1 
-; Label 34
+; Label 36
 
 ; ('e')
 load r201, r200
 eq r202, r201, r103
-ite r202, 38, 145
+ite r202, 40, 147
 add r200, r200, r1 
-; Label 38
+; Label 40
 
 
 ; ('r')
 load r201, r200
 eq r202, r201, r104
-ite r202, 42, 145
+ite r202, 44, 147
 add r200, r200, r1
-; Label 42
+; Label 44
 
 ; ('\0')
 load r201, r200
 eq r202, r201, r105
-ite r202, 46, 145
+ite r202, 48, 147
 add r200, r200, r1
-; Label 46
+; Label 48
 
 
 ; mem[100] = "Password: "
@@ -138,66 +140,66 @@ gets r200
 ; ('p')
 load r201, r200
 eq r202, r201, r101
-ite r202, 86, 145
+ite r202, 88, 147
 add r200, r200, r1 
-; Label 86
+; Label 88
 
 ; ('a')
 load r201, r200
 eq r202, r201, r102
-ite r202, 90, 145
+ite r202, 92, 147
 add r200, r200, r1 
-; Label 90
+; Label 92
 
 ; ('s')
 load r201, r200
 eq r202, r201, r103
-ite r202, 94, 145
+ite r202, 96, 147
 add r200, r200, r1 
-; Label 94
+; Label 96
 
 ; ('s')
 load r201, r200
 eq r202, r201, r104
-ite r202, 98, 145
+ite r202, 100, 147
 add r200, r200, r1
-; Label 98
+; Label 100
 
 ; ('w')
 load r201, r200
 eq r202, r201, r105
-ite r202, 102, 145
+ite r202, 104, 147
 add r200, r200, r1
-; Label 102
+; Label 104
 
 
 ; ('o')
 load r201, r200
 eq r202, r201, r106
-ite r202, 106, 145
+ite r202, 108, 147
 add r200, r200, r1
-; Label 106
+; Label 108
 
 ; ('r')
 load r201, r200
 eq r202, r201, r107
-ite r202, 110, 145
+ite r202, 112, 147
 add r200, r200, r1
-; Label 110
+; Label 112
 
 ; ('d')
 load r201, r200
 eq r202, r201, r108
-ite r202, 114, 145
+ite r202, 116, 147
 add r200, r200, r1
-; Label 114
+; Label 116
 
 ; ('\0')
 load r201, r200
 eq r202, r201, r109
-ite r202, 118, 145
+ite r202, 120, 147
 add r200, r200, r1
-; Label 118
+; Label 120
 
 
 ; mem[100] = "Success", and puts(&mem[100])
