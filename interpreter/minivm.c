@@ -37,7 +37,7 @@ bool stepVMContext(struct VMContext* ctx) {
     // Read a 32-bit bytecode instruction.
     uint32_t instr;
     uint8_t opc;
-    //printf("current pc : %d\n", ctx->pc);
+
     if (ctx->pc >= ctx->numInstrs) {
       printf("Invalid program counter, aborts\n");
       return false;

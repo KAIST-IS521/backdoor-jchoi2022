@@ -28,7 +28,6 @@ void initFuncs(FunPtr *f, uint32_t cnt) {
         f[i] = NULL;
     }
 
-    // TODO: initialize function pointers
     f[0x00] = halt;
     f[0x10] = load;
     f[0x20] = store;
@@ -62,10 +61,10 @@ int main(int argc, char** argv) {
     uint8_t heap[HEAP_SZ + 16];
     uint32_t code_size, num_instrs;
 
-    // There should be at least one argument.
+    // There should be one argument.
     if (argc != 2) usageExit(argc, argv);
 
-   // Load bytecode file
+    // Load bytecode file
     bytecode_f = fopen(argv[1], "rb");
     if (bytecode_f == NULL) {
         perror("fopen");
@@ -81,7 +80,6 @@ int main(int argc, char** argv) {
     }
     num_instrs = code_size / sizeof(uint32_t);
 
-    //printf("num_instrs : %d\n", num_instrs);
     code = (uint32_t *) malloc(code_size);
     if (num_instrs != fread(code, sizeof (uint32_t), num_instrs, bytecode_f)) {
       perror("fread");
