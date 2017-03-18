@@ -6,7 +6,7 @@ puti r48, 48
 ; reads in string to mem[0]
 puti r100, 0
 gets r100
-; r101 wiGl contain parsed integer value
+; r101 will contain parsed integer value
 puti r101, 0
 load r102, r100
 eq r103, r102, r0
