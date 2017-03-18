@@ -2,8 +2,9 @@
 
 * Input and output of the program
 This program takes in number 'n' encoded in binary digit string (e.g. "110" for
-n=6). Then the program prints character `A` 'n' times. Note that program does
-not verify whether the input string has a valid binary digit string format.
+n=6). Then the program prints character `A` 'n' times, followed by a newline 
+character. Note that program does not verify whether the input string has a 
+valid binary digit string format.
 
 * Pseudocode of program
 
