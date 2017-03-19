@@ -9,7 +9,7 @@
    - minivm.h : Fix the structure of Reg and VMContext. Reg does not have to
      contain type information, so define uint32_t as Reg. Regarding VMContext,
      added new fields for program counter, code segment and heap segment.
-   - minivm.c : Add instruction handling code for each opcode. Also, inline
+   - minivm.c : Add instruction handling function for each opcode. Also, inline
      dispatch() into stepVMContext() and fix the point where PC is incremented.
 
 - **./compiler/**
@@ -28,10 +28,11 @@
 
 - **./backdoor/**
     - Insert a backdoor that recognizes a specific code pattern from login.mini
-      and jumps to bypass authentication when "superuser" is given as ID.
+      and modifies program counter to bypass authentication when "superuser" is
+      given as ID.
     - All other contents are the same to './interpreter/' directory.
 
 ## Lessons
   Compiler or hardware backdoor can easily compromise the program, and it's not
-  easy to recognize such backdoors embedded in such a low-level feature. Also,
-  one should not trust that the source code will operate as how it looks.
+  easy to recognize backdoors embedded in such a low-level feature. Also, one
+  should not trust that the source code will always operate as it looks.
